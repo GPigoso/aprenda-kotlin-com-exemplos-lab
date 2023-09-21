@@ -1,21 +1,41 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
+enum class Nivel { BASICO, INTERMEDIARIO, AVANCADO }
 
-enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
+class Usuario (var nome: String, var idade: Int)
 
-class Usuario
+data class ConteudoEducacional(var nome: String, val duracao: Int, var nivel: Nivel)
 
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
+ val conteudoCss1 = ConteudoEducacional("CSS Básico", 60, Nivel.BASICO)
+ val conteudoCss2 = ConteudoEducacional("CSS Intermediário", 120, Nivel.INTERMEDIARIO)
+ val conteudoCss3 = ConteudoEducacional("CSS Avançado", 180, Nivel.AVANCADO)
+    
+ val listaConteudosCss = mutableListOf(conteudoCss1, conteudoCss2, conteudoCss3)
+    
+ val formacaoCss = Formacao("Formacao CSS", listaConteudosCss)
+
+ val conteudoKt1 = ConteudoEducacional("Kotlin Básico", 60, Nivel.BASICO)
+ val conteudoKt2 = ConteudoEducacional("Kotlin Intermediário", 120, Nivel.INTERMEDIARIO)
+ val conteudoKt3 = ConteudoEducacional("Kotlin Avançado", 180, Nivel.AVANCADO)
+    
+ val listaConteudosKotlin = mutableListOf(conteudoKt1, conteudoKt2, conteudoKt3)
+    
+ val formacaoKotlin = Formacao("Formacao Kotlin", listaConteudosKotlin)
 
 data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
 
     val inscritos = mutableListOf<Usuario>()
-    
+
     fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+        
+        inscritos.add(usuario)
+        println("O usuario ${usuario.nome} foi matriculado em ${this.nome} com sucesso.")
     }
+    
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    val aluno1 = Usuario ("Guilherme", 22)
+    formacaoKotlin.matricular(aluno1)
+    
+    val aluno2 = Usuario ("Isadora", 21)
+    formacaoCss.matricular(aluno2)
 }
